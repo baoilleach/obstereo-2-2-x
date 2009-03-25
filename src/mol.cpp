@@ -1482,9 +1482,30 @@ namespace OpenBabel
   {
     //   BeginModify();
 
+
     OBAtom *obatom = CreateAtom();
     obatom->SetIdx(_natoms+1);
     obatom->SetParent(this);
+
+    // Add the unique id
+    OBPairTemplate<unsigned long> *id = new OBPairTemplate<unsigned long>();
+    id->SetAttribute("id");
+    obatom->SetData(id);
+    
+    OBPairTemplate<unsigned long> *idCounter = dynamic_cast<OBPairTemplate<unsigned long>*>(GetData("idCounter"));
+    if (!idCounter) {
+      idCounter = new OBPairTemplate<unsigned long>();
+      idCounter->SetAttribute("idCounter");
+      id->SetValue(0);
+      idCounter->SetValue(0);
+      SetData(idCounter);
+    } else {
+      unsigned long currentId = idCounter->GetGenericValue();
+      id->SetValue(++currentId);
+      idCounter->SetValue(currentId);
+    }
+    
+
 
 #define OBAtomIncrement 100
 
@@ -1575,7 +1596,24 @@ namespace OpenBabel
     obatom->SetIdx(_natoms+1);
     obatom->SetParent(this);
 
-
+    // Add the unique id
+    OBPairTemplate<unsigned long> *id = new OBPairTemplate<unsigned long>();
+    id->SetAttribute("id");
+    obatom->SetData(id);
+    
+    OBPairTemplate<unsigned long> *idCounter = dynamic_cast<OBPairTemplate<unsigned long>*>(GetData("idCounter"));
+    if (!idCounter) {
+      idCounter = new OBPairTemplate<unsigned long>();
+      idCounter->SetAttribute("idCounter");
+      id->SetValue(0);
+      idCounter->SetValue(0);
+      SetData(idCounter);
+    } else {
+      unsigned long currentId = idCounter->GetGenericValue();
+      id->SetValue(++currentId);
+      idCounter->SetValue(currentId);
+    }
+ 
 #define OBAtomIncrement 100
 
     if (_vatom.empty() || _natoms+1 >= (signed)_vatom.size())
