@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 49
+*.jar
+*.class
+*.o
+*.so
+*.jnilib
+*.cpp
+*.java
+org
+
+END

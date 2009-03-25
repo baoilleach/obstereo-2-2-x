@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/src/descriptors
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/src/descriptors/Makefile.in
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/descriptors/Makefile.am
+END
+filters.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/descriptors/filters.cpp
+END
+cmpdfilter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/descriptors/cmpdfilter.cpp
+END
+smartsdescriptors.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/descriptors/smartsdescriptors.cpp
+END
+groupcontrib.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/descriptors/groupcontrib.cpp
+END

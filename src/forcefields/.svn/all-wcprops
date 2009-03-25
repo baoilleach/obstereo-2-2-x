@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/openbabel/!svn/ver/2882/openbabel/branches/openbabel-2-2-x/src/forcefields
+END
+forcefieldmm2.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefieldmm2.cpp
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/src/forcefields/Makefile.in
+END
+forcefieldghemical.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/openbabel/!svn/ver/2787/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefieldghemical.h
+END
+forcefieldmm2.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefieldmm2.h
+END
+forcefielduff.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/openbabel/!svn/ver/2882/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefielduff.cpp
+END
+forcefieldmmff94.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/openbabel/!svn/ver/2787/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefieldmmff94.cpp
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/forcefields/Makefile.am
+END
+forcefielduff.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2820/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefielduff.h
+END
+forcefieldmmff94.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/openbabel/!svn/ver/2787/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefieldmmff94.h
+END
+forcefieldghemical.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/forcefields/forcefieldghemical.cpp
+END

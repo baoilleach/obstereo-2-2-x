@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/openbabel/!svn/ver/2923/openbabel/branches/openbabel-2-2-x/src/formats/xml
+END
+cdxmlformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/xml/cdxmlformat.cpp
+END
+xml.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/xml/xml.cpp
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/src/formats/xml/Makefile.in
+END
+cmlreactformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/openbabel/!svn/ver/2871/openbabel/branches/openbabel-2-2-x/src/formats/xml/cmlreactformat.cpp
+END
+iconv.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2923/openbabel/branches/openbabel-2-2-x/src/formats/xml/iconv.h
+END
+pubchem.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/xml/pubchem.cpp
+END
+cmlformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2871/openbabel/branches/openbabel-2-2-x/src/formats/xml/cmlformat.cpp
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/xml/Makefile.am
+END
+xmlformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/xml/xmlformat.cpp
+END

@@ -1,0 +1,521 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svnroot/openbabel/!svn/ver/2934/openbabel/branches/openbabel-2-2-x/src/formats
+END
+fingerprintformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/openbabel/!svn/ver/2874/openbabel/branches/openbabel-2-2-x/src/formats/fingerprintformat.cpp
+END
+msiformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/msiformat.cpp
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2836/openbabel/branches/openbabel-2-2-x/src/formats/Makefile.in
+END
+adfformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/adfformat.cpp
+END
+smilesformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2933/openbabel/branches/openbabel-2-2-x/src/formats/smilesformat.cpp
+END
+pqrformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2836/openbabel/branches/openbabel-2-2-x/src/formats/pqrformat.cpp
+END
+all.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/all.h
+END
+pdbformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2934/openbabel/branches/openbabel-2-2-x/src/formats/pdbformat.cpp
+END
+outformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2887/openbabel/branches/openbabel-2-2-x/src/formats/outformat.cpp
+END
+chemdrawct.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/chemdrawct.cpp
+END
+jaguarformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2842/openbabel/branches/openbabel-2-2-x/src/formats/jaguarformat.cpp
+END
+ghemicalformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/ghemicalformat.cpp
+END
+cssrformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/cssrformat.cpp
+END
+mdlformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2906/openbabel/branches/openbabel-2-2-x/src/formats/mdlformat.cpp
+END
+gausszmatformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2831/openbabel/branches/openbabel-2-2-x/src/formats/gausszmatformat.cpp
+END
+featformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/featformat.cpp
+END
+MCDLformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/MCDLformat.cpp
+END
+crkformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/crkformat.cpp
+END
+mpdformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/mpdformat.cpp
+END
+povrayformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/povrayformat.cpp
+END
+getinchi.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2790/openbabel/branches/openbabel-2-2-x/src/formats/getinchi.cpp
+END
+APIInterface.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2786/openbabel/branches/openbabel-2-2-x/src/formats/APIInterface.cpp
+END
+alchemyformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/alchemyformat.cpp
+END
+pngformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/pngformat.cpp
+END
+amberformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/amberformat.cpp
+END
+inchiformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/inchiformat.cpp
+END
+xyzformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/xyzformat.cpp
+END
+mmcifformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2903/openbabel/branches/openbabel-2-2-x/src/formats/mmcifformat.cpp
+END
+dmolformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/dmolformat.cpp
+END
+opendxformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2712/openbabel/branches/openbabel-2-2-x/src/formats/opendxformat.cpp
+END
+qchemformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2895/openbabel/branches/openbabel-2-2-x/src/formats/qchemformat.cpp
+END
+bgfformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/bgfformat.cpp
+END
+thermoformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/thermoformat.cpp
+END
+mopacformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2888/openbabel/branches/openbabel-2-2-x/src/formats/mopacformat.cpp
+END
+ArrayList.c
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/ArrayList.c
+END
+balstformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/balstformat.cpp
+END
+acrformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2903/openbabel/branches/openbabel-2-2-x/src/formats/acrformat.cpp
+END
+ArrayList.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/ArrayList.h
+END
+rxnformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2911/openbabel/branches/openbabel-2-2-x/src/formats/rxnformat.cpp
+END
+turbomoleformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/turbomoleformat.cpp
+END
+molreport.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/molreport.cpp
+END
+copyformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/copyformat.cpp
+END
+reportformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/reportformat.cpp
+END
+gamessukformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/gamessukformat.cpp
+END
+gamessformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2921/openbabel/branches/openbabel-2-2-x/src/formats/gamessformat.cpp
+END
+chemdrawcdx.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/chemdrawcdx.cpp
+END
+gausscubeformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/gausscubeformat.cpp
+END
+gaussformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2885/openbabel/branches/openbabel-2-2-x/src/formats/gaussformat.cpp
+END
+shelxformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/shelxformat.cpp
+END
+boxformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/boxformat.cpp
+END
+unichemformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/unichemformat.cpp
+END
+mmodformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/mmodformat.cpp
+END
+tinkerformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/tinkerformat.cpp
+END
+fastaformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/fastaformat.cpp
+END
+mpqcformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/mpqcformat.cpp
+END
+cacaoformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/cacaoformat.cpp
+END
+chemtoolformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/chemtoolformat.cpp
+END
+freefracformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/freefracformat.cpp
+END
+moldenformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/moldenformat.cpp
+END
+msmsformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/msmsformat.cpp
+END
+yasaraformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/yasaraformat.cpp
+END
+nwchemformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/nwchemformat.cpp
+END
+titleformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/titleformat.cpp
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2870/openbabel/branches/openbabel-2-2-x/src/formats/CMakeLists.txt
+END
+pcmodelformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/pcmodelformat.cpp
+END
+zindoformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/zindoformat.cpp
+END
+gromos96format.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/gromos96format.cpp
+END
+CSRformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/CSRformat.cpp
+END
+cccformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/cccformat.cpp
+END
+exampleformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/exampleformat.cpp
+END
+fhformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/fhformat.cpp
+END
+xtcformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2911/openbabel/branches/openbabel-2-2-x/src/formats/xtcformat.cpp
+END
+cifformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2883/openbabel/branches/openbabel-2-2-x/src/formats/cifformat.cpp
+END
+PQSformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/PQSformat.cpp
+END
+cacheformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/cacheformat.cpp
+END
+chem3dformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/chem3dformat.cpp
+END
+carformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2903/openbabel/branches/openbabel-2-2-x/src/formats/carformat.cpp
+END
+mol2format.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/mol2format.cpp
+END
+rsmiformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2838/openbabel/branches/openbabel-2-2-x/src/formats/rsmiformat.cpp
+END
+fchkformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2911/openbabel/branches/openbabel-2-2-x/src/formats/fchkformat.cpp
+END
+hinformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/hinformat.cpp
+END
+chemkinformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2871/openbabel/branches/openbabel-2-2-x/src/formats/chemkinformat.cpp
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2836/openbabel/branches/openbabel-2-2-x/src/formats/Makefile.am
+END
+xedformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/xedformat.cpp
+END
+viewmolformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/formats/viewmolformat.cpp
+END
+fastsearchformat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/openbabel/!svn/ver/2785/openbabel/branches/openbabel-2-2-x/src/formats/fastsearchformat.cpp
+END

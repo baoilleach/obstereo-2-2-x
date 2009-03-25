@@ -1,0 +1,21 @@
+K 10
+svn:ignore
+V 156
+Makefile
+ii_files
+libbabel.a
+babel
+version.h
+babelconfig.h
+config.h
+.deps
+stamp-h1
+.libs
+*.lo
+libopenbabel.la
+openbabel.pyc
+.gdb_history
+*.bundle
+all.h.gch
+
+END

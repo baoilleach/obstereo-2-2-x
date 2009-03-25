@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/openbabel/!svn/ver/2923/openbabel/branches/openbabel-2-2-x/include
+END
+chemdrawcdx.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/chemdrawcdx.h
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/include/Makefile.in
+END
+iconv.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/openbabel/!svn/ver/2923/openbabel/branches/openbabel-2-2-x/include/iconv.h
+END
+zconf.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/zconf.h
+END
+zlib.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/zlib.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/Makefile.am
+END
+RDKitConv.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/RDKitConv.h
+END
+inchi_api.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/inchi_api.h
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/CMakeLists.txt
+END

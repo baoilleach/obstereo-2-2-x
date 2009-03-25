@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/openbabel/!svn/ver/2859/openbabel/branches/openbabel-2-2-x/src/ops
+END
+addpolarh.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/ops/addpolarh.cpp
+END
+gen3d.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/openbabel/!svn/ver/2859/openbabel/branches/openbabel-2-2-x/src/ops/gen3d.cpp
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/src/ops/Makefile.in
+END
+op2d.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/ops/op2d.cpp
+END
+loader.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/openbabel/!svn/ver/2793/openbabel/branches/openbabel-2-2-x/src/ops/loader.cpp
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/ops/Makefile.am
+END
+optransform.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2793/openbabel/branches/openbabel-2-2-x/src/ops/optransform.cpp
+END

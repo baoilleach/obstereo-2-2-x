@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t
+END
+atom.t
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/atom.t
+END
+residue.t
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/residue.t
+END
+bond.t
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/bond.t
+END
+internalcoord.t
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/internalcoord.t
+END
+conversion.t
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/conversion.t
+END
+mol.t
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/mol.t
+END
+format.t
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/format.t
+END
+data.t
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/scripts/perl/t/data.t
+END

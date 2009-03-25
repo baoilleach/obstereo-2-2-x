@@ -1,0 +1,311 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/openbabel/!svn/ver/2912/openbabel/branches/openbabel-2-2-x/include/openbabel
+END
+alias.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/alias.h
+END
+molchrg.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/molchrg.h
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/include/openbabel/Makefile.in
+END
+dlhandler.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/dlhandler.h
+END
+obutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/obutil.h
+END
+ring.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/ring.h
+END
+atom.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/atom.h
+END
+xml.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2911/openbabel/branches/openbabel-2-2-x/include/openbabel/xml.h
+END
+internalcoord.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/internalcoord.h
+END
+typer.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/typer.h
+END
+chains.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/chains.h
+END
+rotor.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/rotor.h
+END
+obconversion.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/openbabel/!svn/ver/2912/openbabel/branches/openbabel-2-2-x/include/openbabel/obconversion.h
+END
+bondtyper.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/bondtyper.h
+END
+optransform.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/optransform.h
+END
+base.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/base.h
+END
+generic.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/generic.h
+END
+descriptor.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/descriptor.h
+END
+op.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/op.h
+END
+griddata.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/griddata.h
+END
+atomclass.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/atomclass.h
+END
+obmolecformat.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svnroot/openbabel/!svn/ver/2911/openbabel/branches/openbabel-2-2-x/include/openbabel/obmolecformat.h
+END
+parsmart.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/parsmart.h
+END
+canon.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/canon.h
+END
+plugin.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/plugin.h
+END
+locale.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/locale.h
+END
+residue.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/residue.h
+END
+patty.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/patty.h
+END
+forcefield.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/forcefield.h
+END
+chiral.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/chiral.h
+END
+reaction.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2838/openbabel/branches/openbabel-2-2-x/include/openbabel/reaction.h
+END
+matrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/matrix.h
+END
+pointgroup.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/pointgroup.h
+END
+kinetics.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/kinetics.h
+END
+data.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2911/openbabel/branches/openbabel-2-2-x/include/openbabel/data.h
+END
+rotamer.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/rotamer.h
+END
+oberror.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/oberror.h
+END
+bitvec.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/bitvec.h
+END
+groupcontrib.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/groupcontrib.h
+END
+lineend.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/lineend.h
+END
+bond.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2878/openbabel/branches/openbabel-2-2-x/include/openbabel/bond.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/Makefile.am
+END
+obiter.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/obiter.h
+END
+rand.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/rand.h
+END
+grid.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/grid.h
+END
+builder.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/builder.h
+END
+mol.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2871/openbabel/branches/openbabel-2-2-x/include/openbabel/mol.h
+END
+fingerprint.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2707/openbabel/branches/openbabel-2-2-x/include/openbabel/fingerprint.h
+END
+tokenst.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/tokenst.h
+END
+format.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/format.h
+END
+phmodel.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/include/openbabel/phmodel.h
+END

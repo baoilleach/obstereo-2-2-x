@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 45
+build
+*.pyc
+_openbabel.so
+openbabel.py
+*.cpp
+
+END

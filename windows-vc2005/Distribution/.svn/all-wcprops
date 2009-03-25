@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/openbabel/!svn/ver/2894/openbabel/branches/openbabel-2-2-x/windows-vc2005/Distribution
+END
+NSISScriptToCreateInstallerOBF.nsi
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svnroot/openbabel/!svn/ver/2894/openbabel/branches/openbabel-2-2-x/windows-vc2005/Distribution/NSISScriptToCreateInstallerOBF.nsi
+END
+logo_small.bmp
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/Distribution/logo_small.bmp
+END
+CheckInstallerScript.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svnroot/openbabel/!svn/ver/2850/openbabel/branches/openbabel-2-2-x/windows-vc2005/Distribution/CheckInstallerScript.py
+END
+ToolsPrograms.txt
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/Distribution/ToolsPrograms.txt
+END
+logo_big.bmp
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/Distribution/logo_big.bmp
+END

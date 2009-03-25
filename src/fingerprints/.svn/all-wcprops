@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svnroot/openbabel/!svn/ver/2832/openbabel/branches/openbabel-2-2-x/src/fingerprints
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2824/openbabel/branches/openbabel-2-2-x/src/fingerprints/Makefile.in
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/fingerprints/Makefile.am
+END
+finger2.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/src/fingerprints/finger2.cpp
+END
+finger3.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2832/openbabel/branches/openbabel-2-2-x/src/fingerprints/finger3.cpp
+END

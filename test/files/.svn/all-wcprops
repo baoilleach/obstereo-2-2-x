@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files
+END
+random
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/random
+END
+3d.head.2.cml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/3d.head.2.cml
+END
+uffresults.txt
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/uffresults.txt
+END
+smartstest.txt
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/smartstest.txt
+END
+formalchargeresults.txt
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/formalchargeresults.txt
+END
+FormulaTest.smi
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/FormulaTest.smi
+END
+unitcell.txt
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/unitcell.txt
+END
+invalid-smiles.txt
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/invalid-smiles.txt
+END
+test2d.xyz
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/test2d.xyz
+END
+ringresults.txt
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/ringresults.txt
+END
+test3d.xyz
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/test3d.xyz
+END
+nci.smi
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/nci.smi
+END
+random2
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/random2
+END
+mmff94results.txt
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/mmff94results.txt
+END
+random3
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/random3
+END
+formularesults.txt
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/formularesults.txt
+END
+ghemicalresults.txt
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/ghemicalresults.txt
+END
+aromatics.smi
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/aromatics.smi
+END
+smartsresults.txt
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/smartsresults.txt
+END
+invalid-smarts.txt
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/invalid-smarts.txt
+END
+attype.00.smi
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/attype.00.smi
+END
+filterset.sdf
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/filterset.sdf
+END
+forcefield.sdf
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/forcefield.sdf
+END
+unitcell_results.txt
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/test/files/unitcell_results.txt
+END

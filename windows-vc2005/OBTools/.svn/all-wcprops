@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools
+END
+Projects in OBTools.txt
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/Projects%20in%20OBTools.txt
+END
+obrotate.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obrotate.vcproj
+END
+obprop.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obprop.vcproj
+END
+obminimize.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obminimize.vcproj
+END
+nbabel.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/nbabel.vcproj
+END
+obchiral.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obchiral.vcproj
+END
+obfit.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obfit.vcproj
+END
+obprobe.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obprobe.vcproj
+END
+obseq.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obseq.vcproj
+END
+obsym.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obsym.vcproj
+END
+obenergy.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obenergy.vcproj
+END
+obmm.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obmm.vcproj
+END
+obrotamer.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obrotamer.vcproj
+END
+obconformer.vcproj
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/openbabel/!svn/ver/2697/openbabel/branches/openbabel-2-2-x/windows-vc2005/OBTools/obconformer.vcproj
+END

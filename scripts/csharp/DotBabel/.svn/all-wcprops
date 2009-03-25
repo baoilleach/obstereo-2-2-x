@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel
+END
+OBWriter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/OBWriter.cs
+END
+OBDescriptor.cs
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/OBDescriptor.cs
+END
+Tools.cs
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/Tools.cs
+END
+OBConvert.cs
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/OBConvert.cs
+END
+OBReader.cs
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/OBReader.cs
+END
+DotBabel.csproj.user
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/DotBabel.csproj.user
+END
+DotBabel.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/DotBabel.csproj
+END
+OBMolExtensions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/OBMolExtensions.cs
+END
+MathExtensions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svnroot/openbabel/!svn/ver/2926/openbabel/branches/openbabel-2-2-x/scripts/csharp/DotBabel/MathExtensions.cs
+END

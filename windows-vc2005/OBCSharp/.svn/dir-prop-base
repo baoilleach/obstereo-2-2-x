@@ -1,0 +1,15 @@
+K 10
+svn:ignore
+V 168
+openbabel-csharp_wrap.cpp
+openbabel.lib
+openbabel.pdb
+openbabel.dll
+openbabel.exp
+Release
+OBCSharp.vcproj.CCDC2K.oboyle.user
+OBDotNet.dll
+OBDotNet-0.1.zip
+OBDotNet-0.1
+
+END
