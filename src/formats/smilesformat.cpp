@@ -483,38 +483,71 @@ namespace OpenBabel {
     std::list<OBCisTransStereo>::iterator ChiralSearch;
     std::vector<unsigned long>::iterator lookup;
 
-    for(int i=1;i<=mol.NumAtoms();i++) {
+    for(int i=1;i<=mol.NumAtoms();i++)
+    {
       // Find an OBCisTransStereo that contains atom i
-      for(ChiralSearch=cistrans.begin();ChiralSearch!=cistrans.end();ChiralSearch++) {
+      for(ChiralSearch=cistrans.begin();ChiralSearch!=cistrans.end();ChiralSearch++)
+      {
         std::vector<unsigned long> refs = ChiralSearch->GetRefs(OBStereo::ShapeU);
         lookup = std::find(refs.begin(), refs.end(), i);
         if(lookup!=refs.end()) { // Atom i is in this OBCisTransStereo
           // Set the up and down for all of the stereo bonds in this chiral data
-          // For the moment, assume that none of them have already been set
           // For the moment, ignore existing IsUp() or IsDown() values
-          isup[mol.GetBond(refs[0], ChiralSearch->GetBegin())] = true;
-          isup[mol.GetBond(refs[2], ChiralSearch->GetEnd())] = false;
+          std::vector<OBBond *> refbonds(4, NULL);
+          refbonds[0] = mol.GetBond(refs[0], ChiralSearch->GetBegin());
           if (refs[1]!=OBStereo::HydrogenId) // Could be a hydrogen
-            isup[mol.GetBond(refs[1], ChiralSearch->GetBegin())] = false;
+            refbonds[1] = mol.GetBond(refs[1], ChiralSearch->GetBegin());
+          if (refs[2]!=OBStereo::HydrogenId) // Could be a hydrogen
+            refbonds[2] = mol.GetBond(refs[2], ChiralSearch->GetEnd());
           if (refs[3]!=OBStereo::HydrogenId) // Could be a hydrogen
-            isup[mol.GetBond(refs[3], ChiralSearch->GetEnd())] = true;
+            refbonds[3] = mol.GetBond(refs[3], ChiralSearch->GetEnd());
+
+          // Have we already set the stereo of any of the bonds in this
+          // OBCisTransStereo already (this can occur in conjugated systems)?
+          // If so, use the alternative configuration if the default configuration
+          // does not agree.
+          bool config[4] = {true, false, false, true};
+          bool alt_config[4] = {false, true, true, false};
+          bool use_alt_config = false;
+
+          for(int i=0;i<4;i++)
+            if (isup.find(refbonds[i]) != isup.end()) // We have already set this one
+              if (isup[refbonds[i]] != config[i])
+              {
+                use_alt_config = true;
+                break;
+              }
+          
+          // Set the configuration
+          for(int i=0;i<4;i++)
+            if (refbonds[i] != NULL)
+              if (use_alt_config)
+                isup[refbonds[i]] = alt_config[i];
+              else
+                isup[refbonds[i]] = config[i];
+
           cistrans.erase(ChiralSearch);
-          break; // There may be cases where it's better not to break (but I can't think of them)
+          break; // break out of the ChiralSearch
         }
       } 
     }
 
-    // 'Copy' the isup values to SetUp() or SetDown()
-    // Should I start by wiping any existing up or down values? 
-    //    Probably, or at the least, add an assert here during testing
+    // Wipe existing Up/Down values and set the new ones
+    FOR_BONDS_OF_MOL(b, mol)
+    {
+      if (b->IsUp())
+        b->UnsetUp();
+      if (b->IsDown())
+        b->UnsetDown();
+    }
     std::map<OBBond *, bool>::iterator UpDown;
-    for(UpDown=isup.begin();UpDown!=isup.end();UpDown++) {
+    for(UpDown=isup.begin();UpDown!=isup.end();UpDown++)
       if(UpDown->second == true)
         UpDown->first->SetUp();
       else
         UpDown->first->SetDown();
-    }
   }
+
   void OBSmilesParser::CreateCisTrans(OBMol &mol, list<OBCisTransStereo> &cistrans)
   {
     // Create a vector of CisTransStereo objects for the molecule
