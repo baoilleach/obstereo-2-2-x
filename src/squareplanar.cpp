@@ -1,4 +1,4 @@
-#include "squareplanar.h"
+#include <openbabel/stereo/squareplanar.h>
 #include <cassert>
 
 namespace OpenBabel {

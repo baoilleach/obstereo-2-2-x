@@ -1,4 +1,4 @@
-#include "tetrahedral.h"
+#include <openbabel/stereo/tetrahedral.h>
 
 #include <cassert>
 #include <iostream>

@@ -4,6 +4,12 @@
 #include <vector>
 #include <algorithm>
 
+#include <openbabel/babelconfig.h>
+
+#ifndef EXTERN
+#  define EXTERN extern
+#endif
+
 namespace OpenBabel {
 
   struct OBStereo 
@@ -85,7 +91,7 @@ namespace OpenBabel {
   };
 
   class OBMol;
-  class OBStereoBase
+  class OBAPI OBStereoBase
   {
     public:
       OBStereoBase(OBMol *mol) : m_mol(mol) {}

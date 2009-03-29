@@ -1,4 +1,4 @@
-#include "tetranonplanar.h"
+#include <openbabel/stereo/tetranonplanar.h>
 #include <openbabel/oberror.h>
 #include <cassert>
 

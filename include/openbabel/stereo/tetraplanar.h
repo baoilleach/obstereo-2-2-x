@@ -3,6 +3,13 @@
 
 #include "stereo.h"
 
+#include <openbabel/babelconfig.h>
+
+#ifndef EXTERN
+#  define EXTERN extern
+#endif
+
+
 namespace OpenBabel {
 
   /**
@@ -54,7 +61,7 @@ namespace OpenBabel {
    * that can be rotated lexicographically.
    */
 
-  class OBTetraPlanarStereo : public OBStereoBase
+  class OBAPI OBTetraPlanarStereo : public OBStereoBase
   {
     public:
       OBTetraPlanarStereo(OBMol *mol);

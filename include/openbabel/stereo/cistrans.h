@@ -4,6 +4,12 @@
 #include "tetraplanar.h"
 #include <vector>
 
+#include <openbabel/babelconfig.h>
+
+#ifndef EXTERN
+#  define EXTERN extern
+#endif
+
 namespace OpenBabel {
 
 /**
@@ -46,7 +52,7 @@ namespace OpenBabel {
  *
  *
  */
-class OBCisTransStereo : public OBTetraPlanarStereo
+class OBAPI OBCisTransStereo : public OBTetraPlanarStereo
 {
   public:
     OBCisTransStereo(OBMol *mol);

@@ -1,4 +1,4 @@
-#include "tetraplanar.h"
+#include <openbabel/stereo/tetraplanar.h>
 #include <cassert>
 
 namespace OpenBabel {

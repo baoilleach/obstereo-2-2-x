@@ -1,4 +1,4 @@
-#include "cistrans.h"
+#include <openbabel/stereo/cistrans.h>
 #include <cassert>
 #include <iostream>
 #include <openbabel/mol.h>
@@ -175,19 +175,19 @@ namespace OpenBabel {
       return false;
     }
 
-    OBAtom *begin = mol->GetAtomById(m_begin);
+    OBAtom *begin = mol->GetAtom(m_begin);
     if (!begin) {
       obErrorLog.ThrowError(__FUNCTION__, "OBCisTransStereo::IsOnSameAtom : Begin reference id is not valid.", obError);
       return false;
     }
-    OBAtom *end = mol->GetAtomById(m_end);
+    OBAtom *end = mol->GetAtom(m_end);
     if (!end) {
       obErrorLog.ThrowError(__FUNCTION__, "OBCisTransStereo::IsOnSameAtom : End reference id is not valid.", obError);
       return false;
     }
 
-    OBAtom *a = mol->GetAtomById(id1);
-    OBAtom *b = mol->GetAtomById(id2);
+    OBAtom *a = mol->GetAtom(id1);
+    OBAtom *b = mol->GetAtom(id2);
     
     if (a && b) {
       // both on begin atom?
@@ -272,9 +272,9 @@ namespace OpenBabel {
           if ((m_refs.at(i) == id1) || (m_refs.at(i) == id2))
             continue;
           if (!c) {
-            c = mol->GetAtomById(m_refs.at(i));
+            c = mol->GetAtom(m_refs.at(i));
           } else {
-            d = mol->GetAtomById(m_refs.at(i));
+            d = mol->GetAtom(m_refs.at(i));
           }
         }
         if (!c || !d) {
@@ -287,7 +287,7 @@ namespace OpenBabel {
         }
         obErrorLog.ThrowError(__FUNCTION__, 
             "OBCisTransStereo::IsOnSameAtom : Atoms with id1 & id2 don't exist, must be a (deleted) hydrogens.", obInfo);
-        return IsOnSameAtom(c->GetId(), d->GetId());
+        return IsOnSameAtom(c->GetIdx(), d->GetIdx());
       }
     }
 
