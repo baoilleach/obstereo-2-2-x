@@ -493,9 +493,11 @@ namespace OpenBabel {
           // For the moment, assume that none of them have already been set
           // For the moment, ignore existing IsUp() or IsDown() values
           isup[mol.GetBond(refs[0], ChiralSearch->GetBegin())] = true;
-          isup[mol.GetBond(refs[1], ChiralSearch->GetBegin())] = false;
           isup[mol.GetBond(refs[2], ChiralSearch->GetEnd())] = false;
-          isup[mol.GetBond(refs[3], ChiralSearch->GetEnd())] = true;
+          if (refs[1]!=OBStereo::HydrogenId) // Could be a hydrogen
+            isup[mol.GetBond(refs[1], ChiralSearch->GetBegin())] = false;
+          if (refs[3]!=OBStereo::HydrogenId) // Could be a hydrogen
+            isup[mol.GetBond(refs[3], ChiralSearch->GetEnd())] = true;
           cistrans.erase(ChiralSearch);
           break; // There may be cases where it's better not to break (but I can't think of them)
         }
@@ -571,13 +573,16 @@ namespace OpenBabel {
 
       if (a1_b1 == NULL || a2_b1 == NULL) continue; // No cis/trans
       
-      OBCisTransStereo ct = OBCisTransStereo(&mol);
-      ct.SetCenters(a1->GetIdx(), a2->GetIdx());
+      // a1_b2 and/or a2_b2 will be NULL if there are bonds to implicit hydrogens
+      unsigned int second = (a1_b2 == NULL) ? OBStereo::HydrogenId : a1_b2->GetNbrAtomIdx(a1);
+      unsigned int fourth = (a2_b2 == NULL) ? OBStereo::HydrogenId : a2_b2->GetNbrAtomIdx(a2);
 
       // If a1_stereo==a2_stereo, this means cis for a1_b1 and a2_b1.
       OBStereo::Shape shape = (a1_stereo == a2_stereo) ? OBStereo::ShapeZ : OBStereo::ShapeU;
-      ct.SetRefs(OBStereo::MakeRefs(a1_b1->GetNbrAtomIdx(a1), a1_b2->GetNbrAtomIdx(a1),
-                                    a2_b1->GetNbrAtomIdx(a2), a2_b2->GetNbrAtomIdx(a2)), shape);
+      OBCisTransStereo ct = OBCisTransStereo(&mol);
+      ct.SetCenters(a1->GetIdx(), a2->GetIdx());
+      ct.SetRefs(OBStereo::MakeRefs(a1_b1->GetNbrAtomIdx(a1), second,
+                                    a2_b1->GetNbrAtomIdx(a2), fourth), shape);
       cistrans.push_back(ct);
     }
   }
