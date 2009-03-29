@@ -205,6 +205,7 @@ namespace OpenBabel {
     void FixCisTransBonds(OBMol &);
     void CorrectUpDownMarks(OBBond *, OBAtom *);
     int NumConnections(OBAtom *);
+    void CreateCisTrans(OBMol &mol, list<OBCisTransStereo> &cistrans);
   };
 
   /////////////////////////////////////////////////////////////////
@@ -472,6 +473,50 @@ namespace OpenBabel {
     //
     // Note: This must be called *after* aromaticity detection.
 
+    std::list<OBCisTransStereo> cistrans; // Use a list because has efficient erase
+    CreateCisTrans(mol, cistrans);
+
+    // Now go from left to right over the atoms of the molecule
+    // and for those that are Up or Down, set the correct value
+    
+    std::map<OBBond *, bool> isup; // Store the result here
+    std::list<OBCisTransStereo>::iterator ChiralSearch;
+    std::vector<unsigned long>::iterator lookup;
+
+    for(int i=1;i<=mol.NumAtoms();i++) {
+      // Find an OBCisTransStereo that contains atom i
+      for(ChiralSearch=cistrans.begin();ChiralSearch!=cistrans.end();ChiralSearch++) {
+        std::vector<unsigned long> refs = ChiralSearch->GetRefs(OBStereo::ShapeU);
+        lookup = std::find(refs.begin(), refs.end(), i);
+        if(lookup!=refs.end()) { // Atom i is in this OBCisTransStereo
+          // Set the up and down for all of the stereo bonds in this chiral data
+          // For the moment, assume that none of them have already been set
+          // For the moment, ignore existing IsUp() or IsDown() values
+          isup[mol.GetBond(refs[0], ChiralSearch->GetBegin())] = true;
+          isup[mol.GetBond(refs[1], ChiralSearch->GetBegin())] = false;
+          isup[mol.GetBond(refs[2], ChiralSearch->GetEnd())] = false;
+          isup[mol.GetBond(refs[3], ChiralSearch->GetEnd())] = true;
+          cistrans.erase(ChiralSearch);
+          break; // There may be cases where it's better not to break (but I can't think of them)
+        }
+      } 
+    }
+
+    // 'Copy' the isup values to SetUp() or SetDown()
+    // Should I start by wiping any existing up or down values? 
+    //    Probably, or at the least, add an assert here during testing
+    std::map<OBBond *, bool>::iterator UpDown;
+    for(UpDown=isup.begin();UpDown!=isup.end();UpDown++) {
+      if(UpDown->second == true)
+        UpDown->first->SetUp();
+      else
+        UpDown->first->SetDown();
+    }
+  }
+  void OBSmilesParser::CreateCisTrans(OBMol &mol, list<OBCisTransStereo> &cistrans)
+  {
+    // Create a vector of CisTransStereo objects for the molecule
+
     FOR_BONDS_OF_MOL(dbi, mol) {
 
       OBBond *dbl_bond = &(*dbi);
@@ -497,73 +542,45 @@ namespace OpenBabel {
 
       // Get the bonds of neighbors of atom1 and atom2
       OBBond *a1_b1 = NULL, *a1_b2 = NULL, *a2_b1 = NULL, *a2_b2 = NULL;
+      bool a1_stereo, a2_stereo;
 
       FOR_BONDS_OF_ATOM(bi, a1) {
         OBBond *b = &(*bi);
         if ((b) == (dbl_bond)) continue;  // skip the double bond we're working on
-        if (NULL == a1_b1)
-          a1_b1 = b;    // remember 1st bond of Atom1
+        if (a1_b1 == NULL && (b->IsUp() || b->IsDown()))
+        {
+          a1_b1 = b;    // remember a stereo bond of Atom1
+           // True/False for "up/down if moved to before the double bond C"
+          a1_stereo = b->IsUp() ^ (b->GetNbrAtomIdx(a1) < a1->GetIdx()) ;
+        }
         else
-          a1_b2 = b;    // remember 2nd bond of Atom1
+          a1_b2 = b;    // remember a 2nd bond of Atom1
       }
 
       FOR_BONDS_OF_ATOM(bi, a2) {
         OBBond *b = &(*bi);
         if (b == dbl_bond) continue;
-        if (NULL == a2_b1)
-          a2_b1 = b;    // remember 1st bond of Atom2
+        if (a2_b1 == NULL && (b->IsUp() || b->IsDown()))
+        {
+          a2_b1 = b;    // remember a stereo bond of Atom1
+          a2_stereo = b->IsUp() ^ (b->GetNbrAtomIdx(a2) < a2->GetIdx()) ;
+        }
         else
-          a2_b2 = b;    // remember 2nd bond of Atom2
+          a2_b2 = b;    // remember a 2nd bond of Atom2
       }
 
-      // Now check that at least two are marked up/down.
-      int count = 0;
-      if (a1_b1 && (a1_b1->IsUp() || a1_b1->IsDown())) count++;
-      if (a1_b2 && (a1_b2->IsUp() || a1_b2->IsDown())) count++;
-      if (a2_b1 && (a2_b1->IsUp() || a2_b1->IsDown())) count++;
-      if (a2_b2 && (a2_b2->IsUp() || a2_b2->IsDown())) count++;
-      if (count < 2) {
-        continue;
-      }
+      if (a1_b1 == NULL || a2_b1 == NULL) continue; // No cis/trans
+      
+      OBCisTransStereo ct = OBCisTransStereo(&mol);
+      ct.SetCenters(a1->GetIdx(), a2->GetIdx());
 
-      // OK, now do what we're here for.  We have two, three or four
-      // bonds, marked "up" or "down", but at this point it just
-      // means '/' or '\', respectively.  In order to decide whether
-      // a bond is "up" or "down", we examine the order of atoms in
-      // the molecule.  See the comments at the top of this function.
-
-      CorrectUpDownMarks(a1_b1, a1);
-      CorrectUpDownMarks(a1_b2, a1);
-      CorrectUpDownMarks(a2_b1, a2);
-      CorrectUpDownMarks(a2_b2, a2);
+      // If a1_stereo==a2_stereo, this means cis for a1_b1 and a2_b1.
+      OBStereo::Shape shape = (a1_stereo == a2_stereo) ? OBStereo::ShapeZ : OBStereo::ShapeU;
+      ct.SetRefs(OBStereo::MakeRefs(a1_b1->GetNbrAtomIdx(a1), a1_b2->GetNbrAtomIdx(a1),
+                                    a2_b1->GetNbrAtomIdx(a2), a2_b2->GetNbrAtomIdx(a2)), shape);
+      cistrans.push_back(ct);
     }
   }
-
-  void OBSmilesParser::CorrectUpDownMarks(OBBond *b, OBAtom *a)
-  {
-    // This is an adjunct to FixCisTransBonds(), above.  See the comments
-    // there.  In this function, atom a is one of the double-bonded atoms,
-    // and bond b is a bond from atom a to one of the substituent atoms.
-
-    if (!b || !a || !(b->IsUp() || b->IsDown())) return;
-    
-    OBAtom *ax = b->GetNbrAtom(a);
-
-    // If the substituent comes before the double-bonded atom, then
-    // the initial marks from the SMILES are correct.
-    if (ax->GetIdx() < a->GetIdx())
-      return;
-
-    // The substituent comes after the double-bonded atom, so
-    // the bond '/' means "up", and '\' means "down".
-    if (b->IsUp()) {
-      b->SetDown();
-    } else {
-      b->SetUp();
-    }
-  }
-
-
   void OBSmilesParser::FindOrphanAromaticAtoms(OBMol &mol)
   {
     //Facilitates the use lower case shorthand for radical entry
