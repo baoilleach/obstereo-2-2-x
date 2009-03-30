@@ -586,7 +586,7 @@ namespace OpenBabel {
         {
           a1_b1 = b;    // remember a stereo bond of Atom1
            // True/False for "up/down if moved to before the double bond C"
-          a1_stereo = b->IsUp() ^ (b->GetNbrAtomIdx(a1) < a1->GetIdx()) ;
+          a1_stereo = !(b->IsUp() ^ (b->GetNbrAtomIdx(a1) < a1->GetIdx())) ;
         }
         else
           a1_b2 = b;    // remember a 2nd bond of Atom1
@@ -598,7 +598,7 @@ namespace OpenBabel {
         if (a2_b1 == NULL && (b->IsUp() || b->IsDown()))
         {
           a2_b1 = b;    // remember a stereo bond of Atom1
-          a2_stereo = b->IsUp() ^ (b->GetNbrAtomIdx(a2) < a2->GetIdx()) ;
+          a2_stereo = !(b->IsUp() ^ (b->GetNbrAtomIdx(a2) < a2->GetIdx())) ;
         }
         else
           a2_b2 = b;    // remember a 2nd bond of Atom2
@@ -614,8 +614,12 @@ namespace OpenBabel {
       OBStereo::Shape shape = (a1_stereo == a2_stereo) ? OBStereo::ShapeZ : OBStereo::ShapeU;
       OBCisTransStereo ct = OBCisTransStereo(&mol);
       ct.SetCenters(a1->GetIdx(), a2->GetIdx());
-      ct.SetRefs(OBStereo::MakeRefs(a1_b1->GetNbrAtomIdx(a1), second,
-                                    a2_b1->GetNbrAtomIdx(a2), fourth), shape);
+      if (a1_stereo == a2_stereo)
+        ct.SetRefs(OBStereo::MakeRefs(a1_b1->GetNbrAtomIdx(a1), second,
+                                      fourth, a2_b1->GetNbrAtomIdx(a2)), OBStereo::ShapeU);
+      else
+        ct.SetRefs(OBStereo::MakeRefs(a1_b1->GetNbrAtomIdx(a1), second,
+                                      a2_b1->GetNbrAtomIdx(a2), fourth), OBStereo::ShapeU);
       cistrans.push_back(ct);
     }
   }
