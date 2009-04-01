@@ -2143,7 +2143,7 @@ namespace OpenBabel {
     OBBitVec _uatoms,_ubonds;
     std::vector<OBBondClosureInfo> _vopen;
     std::string       _canorder;
-    std::vector<OBCisTransStereo> _cistrans;
+    std::vector<OBCisTransStereo> _cistrans, _unvisited_cistrans;
     std::map<OBBond *, bool> _isup;
     
     bool          _canonicalOutput; // regular or canonical SMILES
@@ -2457,6 +2457,7 @@ namespace OpenBabel {
                                       a2_b1->GetNbrAtomIdx(a2), fourth), OBStereo::ShapeU);
       _cistrans.push_back(ct);
     }
+    _unvisited_cistrans = _cistrans; // Make a copy of _cistrans
   }
   char OBMol2Cansmi::GetCisTransBondSymbol(OBBond *bond, OBCanSmiNode *node)
   {
@@ -2476,26 +2477,52 @@ namespace OpenBabel {
     if (!bond || (!bond->IsUp() && !bond->IsDown()))
       return '\0';
     OBAtom *atom = node->GetAtom();
+    OBAtom *nbr_atom = bond->GetNbrAtom(atom);
     OBMol *mol = atom->GetParent();
+
+    // If this bond is in two different obcistransstereos (e.g. a conjugated system)
+    // choose the one where the dbl bond atom is *atom (i.e. the one which comes first)
+    std::vector<OBCisTransStereo>::iterator ChiralSearch;
+    std::vector<unsigned long>::iterator lookup;    
+
+    bool dbl_bond_first = false;
+    if (atom->HasDoubleBond())
+    {
+      if (nbr_atom->HasDoubleBond())
+        // Check whether the atom is a center in any CisTransStereo. If so,#
+        // then this CisTransStereo takes precedence over any other
+        for (ChiralSearch=_cistrans.begin();ChiralSearch!=_cistrans.end();ChiralSearch++)
+        {
+          if (atom->GetIdx() == ChiralSearch->GetBegin() || atom->GetIdx() == ChiralSearch->GetEnd()) {
+            // I don't think I need to check whether it has a bond with nbr_atom
+            dbl_bond_first = true;
+            break;
+          }        
+        }
+      else
+        dbl_bond_first = true;
+    }
 
     // Has the symbol for this bond already been set?
     if (_isup.find(bond) == _isup.end()) // No it hasn't
     {
-      // Find an OBCisTransStereo that contains bond
-      unsigned int endatom;
-      if (atom->HasDoubleBond())
-        endatom = bond->GetNbrAtomIdx(atom);
-      else
+      unsigned int endatom, centeratom;
+      if (dbl_bond_first) {
+        endatom = nbr_atom->GetIdx();
+        centeratom = atom->GetIdx();
+      }
+      else {
         endatom = atom->GetIdx();
+        centeratom = nbr_atom->GetIdx();
+      }
 
-      std::vector<OBCisTransStereo>::iterator ChiralSearch;
-      std::vector<unsigned long>::iterator lookup;
-
-      for (ChiralSearch=_cistrans.begin();ChiralSearch!=_cistrans.end();ChiralSearch++)
+      for (ChiralSearch=_unvisited_cistrans.begin();ChiralSearch!=_unvisited_cistrans.end();ChiralSearch++)
       {
         std::vector<unsigned long> refs = ChiralSearch->GetRefs(OBStereo::ShapeU);
         lookup = std::find(refs.begin(), refs.end(), endatom);
-        if(lookup!=refs.end()) { // Atom endatom is in this OBCisTransStereo
+        if (lookup!=refs.end() &&
+          (ChiralSearch->GetBegin()==centeratom || ChiralSearch->GetEnd()==centeratom))
+        { // Atoms endatom and centeratom are in this OBCisTransStereo
           
           std::vector<OBBond *> refbonds(4, NULL);
           refbonds[0] = mol->GetBond(refs[0], ChiralSearch->GetBegin());
@@ -2508,25 +2535,33 @@ namespace OpenBabel {
 
           // What symbol would the four refs use if before the dbl bond?
           bool config[4] = {true, false, false, true};
-          bool alt_config[4] = {false, true, true, false};
-          bool use_alt_config = false;
-          // Set the configuration
+          bool use_same_config = true;
+          // (The actual config used will be config ^ use_same_config)
+
+          // Make sure that the symbol for this bond is true. This ensures 
+          // a canonical string, so that it's always C/C=C/C and not C\C=C\C.
           for(int i=0;i<4;i++)
-            if (_isup.find(refbonds[i]) != _isup.end()) // We have already set this one
-              if (_isup[refbonds[i]] != config[i])
+            if (refbonds[i] == bond)
+              if (!config[i])
               {
-                use_alt_config = true;
+                  use_same_config = false;
+                  break;
+              }
+          // If any of the bonds have been previously set, now set them all
+          // in the opposite sense
+          for(int i=0;i<4;i++)
+            if (_isup.find(refbonds[i]) != _isup.end()) // We have already set this one (conjugated bond)
+              if (_isup[refbonds[i]] == (config[i] ^ use_same_config))
+              {
+                use_same_config = !use_same_config;
                 break;
               }
-
+          // Set the configuration
           for(int i=0;i<4;i++)
             if (refbonds[i] != NULL)
-              if (use_alt_config)
-                _isup[refbonds[i]] = alt_config[i];
-              else
-                _isup[refbonds[i]] = config[i];
+              _isup[refbonds[i]] = config[i] ^ use_same_config;
 
-          _cistrans.erase(ChiralSearch);
+          _unvisited_cistrans.erase(ChiralSearch);
           break; // break out of the ChiralSearch          
         }
       }
@@ -2535,7 +2570,7 @@ namespace OpenBabel {
      // If ChiralSearch didn't find the bond, we can't set this symbol
     if (_isup.find(bond) == _isup.end()) return '\0';
 
-    if (atom->HasDoubleBond()) { // double-bonded atom is first in the SMILES
+    if (dbl_bond_first) { // double-bonded atom is first in the SMILES
       if (_isup[bond])
         return '/';
       else
