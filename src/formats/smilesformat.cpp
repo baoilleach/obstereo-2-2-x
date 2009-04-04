@@ -2193,7 +2193,6 @@ namespace OpenBabel {
                                    vector<unsigned int> &canonical_order,
                                    bool isomeric);
     bool         HasStereoDblBond(OBBond *, OBAtom *atom);
-    bool         HasStereoDblBond_b(OBBond *, OBAtom *atom);
     std::string &GetOutputOrder()
     {
       return _canorder;
@@ -2492,41 +2491,6 @@ namespace OpenBabel {
           if (nbr_atom->GetIdx() == ChiralSearch->GetBegin() || nbr_atom->GetIdx() == ChiralSearch->GetEnd()) {
             // I don't think I need to check whether it has a bond with atom
             stereo_dbl = false;
-            break;
-          }        
-        }
-    }
-    return stereo_dbl;
-  }
-    bool OBMol2Cansmi::HasStereoDblBond_b(OBBond *bond, OBAtom *atom)
-  {
-    // This is a helper function for determining whether to
-    // consider writing a cis/trans bond symbol for bond closures.
-    // Returns TRUE only if the atom is connected to the cis/trans
-    // double bond. To handle the case of conjugated bonds, one must
-    // remember that the ring opening preceded the closure, so if the
-    // ring opening bond was on a stereocenter, it got the symbol already.
-
-    if (!bond || (!bond->IsUp() && !bond->IsDown()))
-      return false;
-
-    std::vector<OBCisTransStereo>::iterator ChiralSearch;
-
-    OBAtom *nbr_atom = atom; // Ring opening
-    atom = bond->GetNbrAtom(nbr_atom); // Ring closing
-
-    bool stereo_dbl = true;
-    if (atom->HasDoubleBond())
-    {
-      stereo_dbl = false;
-      if (nbr_atom->HasDoubleBond())
-        // Check whether the ring opening is a center in any CisTransStereo. If so,
-        // then it takes priority.
-        for (ChiralSearch=_cistrans.begin();ChiralSearch!=_cistrans.end();ChiralSearch++)
-        {
-          if (nbr_atom->GetIdx() == ChiralSearch->GetBegin() || nbr_atom->GetIdx() == ChiralSearch->GetEnd()) {
-            // I don't think I need to check whether it has a bond with atom
-            stereo_dbl = true;
             break;
           }        
         }
