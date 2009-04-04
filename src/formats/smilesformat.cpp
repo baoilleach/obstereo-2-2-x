@@ -2192,7 +2192,8 @@ namespace OpenBabel {
                                    vector<unsigned int> &symmetry_classes,
                                    vector<unsigned int> &canonical_order,
                                    bool isomeric);
-
+    bool         HasStereoDblBond(OBBond *, OBAtom *atom);
+    bool         HasStereoDblBond_b(OBBond *, OBAtom *atom);
     std::string &GetOutputOrder()
     {
       return _canorder;
@@ -2323,6 +2324,11 @@ namespace OpenBabel {
       // is counting the atom across the double bond, too, so the atom
       // must have at least two heavy atoms, i.e. at most one hydrogen.)
       if (b->GetHvyValence() < 2 || c->GetHvyValence() < 2)
+        continue;
+
+      // Make sure that there's a single bond at each end
+      // (avoids cis/trans assignation to C-N=S=O  as in PubChem CID 16130)
+      if (!b->HasSingleBond() || !c->HasSingleBond())
         continue;
 
       // Ok, looks like a cis/trans double bond.
@@ -2459,6 +2465,74 @@ namespace OpenBabel {
     }
     _unvisited_cistrans = _cistrans; // Make a copy of _cistrans
   }
+  bool OBMol2Cansmi::HasStereoDblBond(OBBond *bond, OBAtom *atom)
+  {
+    // This is a helper function for determining whether to
+    // consider writing a cis/trans bond symbol for bond closures.
+    // Returns TRUE only if the atom is connected to the cis/trans
+    // double bond. To handle the case of conjugated bonds, one must
+    // remember that the ring opening preceded the closure, so if the
+    // ring opening bond was on a stereocenter, it got the symbol already.
+
+    if (!bond || (!bond->IsUp() && !bond->IsDown()))
+      return false;
+
+    std::vector<OBCisTransStereo>::iterator ChiralSearch;
+    OBAtom *nbr_atom = bond->GetNbrAtom(atom);
+
+    bool stereo_dbl = false;
+    if (atom->HasDoubleBond())
+    {
+      stereo_dbl = true;
+      if (nbr_atom->HasDoubleBond())
+        // Check whether the nbr_atom is a center in any CisTransStereo. If so,
+        // then the ring opening already had the symbol.
+        for (ChiralSearch=_cistrans.begin();ChiralSearch!=_cistrans.end();ChiralSearch++)
+        {
+          if (nbr_atom->GetIdx() == ChiralSearch->GetBegin() || nbr_atom->GetIdx() == ChiralSearch->GetEnd()) {
+            // I don't think I need to check whether it has a bond with atom
+            stereo_dbl = false;
+            break;
+          }        
+        }
+    }
+    return stereo_dbl;
+  }
+    bool OBMol2Cansmi::HasStereoDblBond_b(OBBond *bond, OBAtom *atom)
+  {
+    // This is a helper function for determining whether to
+    // consider writing a cis/trans bond symbol for bond closures.
+    // Returns TRUE only if the atom is connected to the cis/trans
+    // double bond. To handle the case of conjugated bonds, one must
+    // remember that the ring opening preceded the closure, so if the
+    // ring opening bond was on a stereocenter, it got the symbol already.
+
+    if (!bond || (!bond->IsUp() && !bond->IsDown()))
+      return false;
+
+    std::vector<OBCisTransStereo>::iterator ChiralSearch;
+
+    OBAtom *nbr_atom = atom; // Ring opening
+    atom = bond->GetNbrAtom(nbr_atom); // Ring closing
+
+    bool stereo_dbl = true;
+    if (atom->HasDoubleBond())
+    {
+      stereo_dbl = false;
+      if (nbr_atom->HasDoubleBond())
+        // Check whether the ring opening is a center in any CisTransStereo. If so,
+        // then it takes priority.
+        for (ChiralSearch=_cistrans.begin();ChiralSearch!=_cistrans.end();ChiralSearch++)
+        {
+          if (nbr_atom->GetIdx() == ChiralSearch->GetBegin() || nbr_atom->GetIdx() == ChiralSearch->GetEnd()) {
+            // I don't think I need to check whether it has a bond with atom
+            stereo_dbl = true;
+            break;
+          }        
+        }
+    }
+    return stereo_dbl;
+  }
   char OBMol2Cansmi::GetCisTransBondSymbol(OBBond *bond, OBCanSmiNode *node)
   {
     // Given a cis/trans bond and the node in the SMILES tree, figures out
@@ -2560,7 +2634,6 @@ namespace OpenBabel {
           for(int i=0;i<4;i++)
             if (refbonds[i] != NULL)
               _isup[refbonds[i]] = config[i] ^ use_same_config;
-
           _unvisited_cistrans.erase(ChiralSearch);
           break; // break out of the ChiralSearch          
         }
@@ -3446,17 +3519,28 @@ namespace OpenBabel {
     if (!vclose_bonds.empty()) {
       vector<OBBondClosureInfo>::iterator bci;
       for (bci = vclose_bonds.begin();bci != vclose_bonds.end();bci++) {
-        if (!bci->is_open) {
-          char bs[2];
-          bs[0] = GetCisTransBondSymbol(bci->bond, node);
-          bs[1] = '\0';
-          if (bs[0]) {
+        if (!bci->is_open)
+        { // Ring closure
+          char bs[2] = {'\0', '\0'};
+          // Only get symbol for ring closures on the dbl bond
+          if (HasStereoDblBond(bci->bond, node->GetAtom()))  
+            bs[0] = GetCisTransBondSymbol(bci->bond, node);
+          if (bs[0])
             strcat(buffer, bs);	// append "/" or "\"
-          }
-          else {
+          else
+          {
             if (bci->bond->GetBO() == 2 && !bci->bond->IsAromatic())  strcat(buffer,"=");
             if (bci->bond->GetBO() == 3)                              strcat(buffer,"#");
           }
+        }
+        else
+        { // Ring opening
+          char bs[2] = {'\0', '\0'};
+          // Only get symbol for ring openings on the dbl bond
+          if (!HasStereoDblBond(bci->bond, bci->bond->GetNbrAtom(node->GetAtom())))  
+            bs[0] = GetCisTransBondSymbol(bci->bond, node);
+          if (bs[0])
+            strcat(buffer, bs);	// append "/" or "\"
         }
         if (bci->ringdigit > 9) strcat(buffer,"%");
         sprintf(buffer+strlen(buffer), "%d", bci->ringdigit); 
