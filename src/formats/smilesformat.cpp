@@ -187,6 +187,8 @@ namespace OpenBabel {
     bool chiralWatch; // set when a chiral atom is read
     map<OBAtom*, TetrahedralStereo*> _tetrahedralMap; // map of ChiralAtoms and their data
     OBAtomClassData _classdata; // to hold atom class data like [C:2]
+    vector<OBBond*> _bcbonds; // Remember which bonds are bond closure bonds
+
   public:
 
     OBSmilesParser() { }
@@ -587,6 +589,11 @@ namespace OpenBabel {
           a1_b1 = b;    // remember a stereo bond of Atom1
            // True/False for "up/down if moved to before the double bond C"
           a1_stereo = !(b->IsUp() ^ (b->GetNbrAtomIdx(a1) < a1->GetIdx())) ;
+          if (std::find(_bcbonds.begin(), _bcbonds.end(), a1_b1)!=_bcbonds.end())
+          { // This is a bond closure, so the cis/trans mark appears after
+            // the double bond C (and the Idx test is incorrect)
+            a1_stereo = !b->IsUp();
+          }
         }
         else
           a1_b2 = b;    // remember a 2nd bond of Atom1
@@ -599,6 +606,10 @@ namespace OpenBabel {
         {
           a2_b1 = b;    // remember a stereo bond of Atom1
           a2_stereo = !(b->IsUp() ^ (b->GetNbrAtomIdx(a2) < a2->GetIdx())) ;
+          if (std::find(_bcbonds.begin(), _bcbonds.end(), a2_b1)!=_bcbonds.end())
+          { // This is a bond closure
+            a2_stereo = !b->IsUp();
+          }
         }
         else
           a2_b2 = b;    // remember a 2nd bond of Atom2
@@ -1942,6 +1953,10 @@ namespace OpenBabel {
           }
           
           mol.AddBond((*j)[1],_prev,ord,bf,(*j)[4]);
+          
+          // For assigning cis/trans in the presence of bond closures, we need to
+          // remember all bond closure bonds.
+          _bcbonds.push_back(mol.GetBond((*j)[1],_prev));
             
           // after adding a bond to atom "_prev"
           // search to see if atom is bonded to a chiral atom
