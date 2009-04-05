@@ -23,8 +23,8 @@ GNU General Public License for more details.
 #include <openbabel/chiral.h>
 #include <openbabel/atomclass.h>
 
-#include <openbabel/stereo/tetrahedral.h>
-#include <openbabel/stereo/cistrans.h>
+//#include <openbabel/stereo/tetrahedral.h>
+//#include <openbabel/stereo/cistrans.h>
 
 
 #include <openbabel/canon.h>
@@ -34,6 +34,636 @@ GNU General Public License for more details.
 using namespace std;
 
 namespace OpenBabel {
+
+/*******************************************
+             OBStereo.h
+********************************************/
+
+  struct OBStereo 
+  {
+    /**
+     * The various types of stereochemistry
+     *
+     */
+    enum Type {
+      None                = (1<<0), //!< no stereochemistry
+      Unknown             = (1<<2), //!< unknown
+      Unspecified         = (1<<3), //!< not specified
+      CisTrans            = (1<<4), //!< cis/trans double bond
+      ExtendedCisTrans    = (1<<5), //!< allene, biphenyl, ...
+      SquarePlanar        = (1<<6), //!< Square-planar stereochemistry
+      TetraPlanar         = CisTrans | ExtendedCisTrans | SquarePlanar, //!< planar configurations od four atoms
+      Tetrahedral         = (1<<7), //!< tetrahedral
+      ExtendedTetrahedral = (1<<8), //!< extended tetrahedral
+      TetreNonPlanar      = Tetrahedral | ExtendedTetrahedral
+      /*
+      TrigonalBipyramidal = 4, //!< Trigonal-bipyramidal stereochemistry
+      Octahedral          = 5, //!< Octahedral stereochemistry
+      DoubleBond          = 6, //!< Double bond stereochemistry
+      */
+    };
+
+    /**
+     * Shapes used by OBTetraPlanarStereo subclasses for 
+     * setting/getting reference ids.
+     */
+    enum Shape {
+      ShapeU = 1,
+      ShapeZ = 2,
+      Shape4 = 3
+    };
+
+    /**
+     * Views used by OBTetraNonPlanarStereo subclasses for
+     * setting/getting reference ids.
+     */
+    enum View
+    {
+      ViewFrom = 1, //!< view from the atom (id parameter) towards the center atom
+      ViewTowards = 2, //!< view from center atom towards the atom (id paramter)
+    };
+
+    /**
+     * Windings used by OBTetraNonPlanar subclasses for 
+     * setting/getting reference ids.
+     */
+    enum Winding {
+      Clockwise = 1,     //!< Clockwise winding
+      AntiClockwise = 2  //!< AntiClockiwe winding (or CounterClockwise
+    };
+
+    /**
+     * Some useful predefined ids. 
+     */
+    enum {
+      NoId = -1,       //!< no id
+      ImplicitId = -2  //!< hydrogen, unknown id
+    };
+
+    /**
+     * Create a std::vector<unsigned long> filled with @p id1, @p id2, @p id3 & @p id4.
+     */
+    static std::vector<unsigned long> MakeRefs(unsigned long id1, unsigned long id2,
+        unsigned long id3, unsigned long id4 = NoId)
+    {
+      std::vector<unsigned long> refs(3);
+      refs[0] = id1;
+      refs[1] = id2;
+      refs[2] = id3;
+      if (id4 != NoId)
+        refs.push_back(id4);
+      return refs;
+    }
+
+  };
+
+  class OBMol;
+  class OBStereoBase
+  {
+    public:
+      OBStereoBase(OBMol *mol) : m_mol(mol) {}
+      virtual ~OBStereoBase() { m_mol = 0; }
+      /**
+       * Get the molecule. This can be used by subclasses when more
+       * information is needed (e.g. OBCisTransStereo::GetCisRef, ...).
+       */
+      OBMol* GetMolecule() const { return m_mol; }
+      /**
+       * Reimplemented by subclasses to return type.
+       */
+      virtual OBStereo::Type GetType() const = 0;
+    private:
+      OBMol *m_mol; //!< the parent molecule
+  };
+
+
+/*******************************************
+             OBTetraPlanarStereo.h
+********************************************/
+
+  class OBTetraPlanarStereo : public OBStereoBase
+  {
+    public:
+      OBTetraPlanarStereo(OBMol *mol);
+      virtual ~OBTetraPlanarStereo();
+
+      /**
+       * Subclasses must implement the SetRefs method.
+       */
+      virtual void SetRefs(const std::vector<unsigned long> &refs, 
+        OBStereo::Shape shape = OBStereo::ShapeU) = 0;
+      /**
+       * Subclasses must implement the GetRefs method.
+       */
+      virtual std::vector<unsigned long> GetRefs(OBStereo::Shape shape = OBStereo::ShapeU) const = 0;
+      /**
+       * Subclasses must implement the Compare method to check 
+       * if @p refs match the stored stereochemistry.
+       */
+      virtual bool Compare(const std::vector<unsigned long> &refs, 
+          OBStereo::Shape shape) const = 0;
+      /**
+       * Convert a sequence of reference ids from U, Z or 4 shape to 
+       * internal U shape.
+       * @note this method does nothing if a U shape is given as input.
+       */
+      static std::vector<unsigned long> ToInternal(const std::vector<unsigned long> &refs, 
+          OBStereo::Shape shape);
+      /**
+       * Convert a sequence of reference ids from internal U shape 
+       * to U, Z or 4 shape.
+       * @note this method does nothing if a U shape is given as input.
+       */
+      static std::vector<unsigned long> ToShape(const std::vector<unsigned long> &refs, 
+          OBStereo::Shape shape);
+  };
+
+
+/*******************************************
+             OBCisTransStereo.h
+********************************************/
+
+class OBCisTransStereo : public OBTetraPlanarStereo
+{
+  public:
+    OBCisTransStereo(OBMol *mol);
+    virtual ~OBCisTransStereo();
+
+    /**
+     * Get the OBStereo::Type for this object.
+     * @return OBStereo::CisTrans
+     */
+    OBStereo::Type GetType() const { return OBStereo::CisTrans; }
+    /**
+     * @return True if this object is valid. This object is valid if all (center and
+     * and reference) atom ids are set.
+     */
+    bool IsValid() const;
+
+    /**
+     * Set the central, double bonded atoms
+     */
+    void SetCenters(unsigned long begin, unsigned long end);
+    /**
+     * Set the begin atom for the double bond
+     */
+    void SetBegin(unsigned long begin);
+    /**
+     * Set the end atom for the double bond
+     */
+    void SetEnd(unsigned long end);
+    /**
+     * @return The double bond begin atom.
+     */
+    unsigned long GetBegin() const;
+    /**
+     * @return The double bond begin atom.
+     */
+    unsigned long GetEnd() const;
+
+    //! @name Methods to get and set the reference ids.
+    //@{
+    /**
+     * Set the 4 reference ids. The @p shape parameter specifies how the 
+     * reference ids are layed out.
+     *
+     * @param refs The 4 reference ids.
+     * @param shape The reference id order in the returned list.
+     * These are all examples of the same configuration:
+     * @image html SPshapes.png
+     */
+    void SetRefs(const std::vector<unsigned long> &refs, 
+        OBStereo::Shape shape = OBStereo::ShapeU);
+    /**
+     * Get a list of the 4 reference ids. The ids occur in the sequence 
+     * following the specified shape.
+     *
+     * @param shape The reference id order in the returned list.
+     * These are all examples of the same configuration:
+     * @image html SPshapes.png
+     */
+    std::vector<unsigned long> GetRefs(OBStereo::Shape shape = OBStereo::ShapeU) const;
+    //@}
+
+    //! @name Query methods to compare stereochemistry.
+    //@{
+    /**
+     * Check if the two atoms for @p id1 & @p id2 are bonded to the same 
+     * atom. If the atoms for one of the atoms doesn't exist (anymore), 
+     * the valence of the begin and end atom is checked. If the exising 
+     * atom is bonded to the begin atom and end->GetValence() == 2, the 
+     * ids are considered to be on different atoms. The reasoning behind
+     * this is that hydrogens may be deleted. However, you can also use
+     * OBStereo::ImplicitId explicitly in code like:
+     *
+     * @code
+     * // 
+     * //  F       F      F      F     0      3
+     * //   \     /       |      |     |      |
+     * //    C===C        | C  C |     | 1  2 |
+     * //   /     \       |      |     |      |
+     * // (H)     (H)    (H)----(H)    H------H
+     * //
+     * reading smiles F/C=C\F cis-difluorethene
+     * OBCisTransStereo ct(mol);
+     * ct.SetCenters(1, 2);
+     * ct.SetRefs(OBStereo::MakeRefs(0, OBStereo::ImplicitId, OBStereo::ImplicitId, 3));
+     * ...
+     * @endcode
+     *
+     * @return True if @p id1 and @p id2 are bonded to the same atom 
+     * taking implicit hydrogens into account.
+     */
+    bool IsOnSameAtom(unsigned long id1, unsigned long id2) const;
+    /**
+     * @return True if the two reference ids are placed trans configuration.
+     */
+    bool IsTrans(unsigned long id1, unsigned long id2) const;
+    /**
+     * @return True if the two reference ids are placed in a cis configuration.
+     */
+    bool IsCis(unsigned long id1, unsigned long id2) const;
+    /**
+     * @image html gettransref.png
+     * Get the reference id trans from reference @p id.
+     */
+    unsigned long GetTransRef(unsigned long id) const;
+    /**
+     * @image html getcisref.png
+     * Get the reference id cis from reference @p id.
+     */
+    unsigned long GetCisRef(unsigned long id) const;
+    /**
+     * This function checks to see if the internal reference ids match with @p refs.
+     * This is done by checking which reference ids are trans. See the OBTetraPlanarStereo
+     * class documentation for more information about the 3 possible configurations.
+     * \return True if the stored reference ids match the configuration 
+     * of @p refs using @p shape. 
+     */
+    bool Compare(const std::vector<unsigned long> &refs, OBStereo::Shape shape) const;
+    //@}
+ 
+
+  private:
+
+    unsigned long m_begin; //!< the center/chiral atom
+    unsigned long m_end; //!< the center/chiral atom
+    std::vector<unsigned long> m_refs; //!< the 4 clockwise atom refs
+};
+
+
+/*******************************************
+             OBTetraPlanarStereo
+********************************************/
+
+    OBTetraPlanarStereo::OBTetraPlanarStereo(OBMol *mol) : OBStereoBase(mol)
+  {
+  }
+
+  OBTetraPlanarStereo::~OBTetraPlanarStereo()
+  {
+  }
+
+  std::vector<unsigned long> OBTetraPlanarStereo::ToInternal(const std::vector<unsigned long> &refs, 
+      OBStereo::Shape shape)
+  {
+    //assert( refs.size() == 4 );
+    std::vector<unsigned long> result(refs);
+
+    switch (shape) {
+      case OBStereo::ShapeU:
+        // same as internal, just copy
+        return result;
+      case OBStereo::ShapeZ:
+        // normalize to U shape
+        result[1] = refs.at(2);
+        result[2] = refs.at(3);
+        result[3] = refs.at(1);
+        return result;
+      case OBStereo::Shape4:
+        // normalize to U shape
+        result[1] = refs.at(2);
+        result[2] = refs.at(1);
+        return result;
+    }
+  
+  }
+  
+  std::vector<unsigned long> OBTetraPlanarStereo::ToShape(const std::vector<unsigned long> &refs, 
+      OBStereo::Shape shape)
+  {
+    //assert( refs.size() == 4 );
+    std::vector<unsigned long> result(refs);
+
+    switch (shape) {
+      case OBStereo::ShapeU:
+        // same as internal, just copy
+        return result;
+      case OBStereo::ShapeZ:
+        // convert to U shape
+        result[1] = refs.at(3);
+        result[2] = refs.at(1);
+        result[3] = refs.at(2);
+        return result;
+      case OBStereo::Shape4:
+        // normalize to U shape
+        result[1] = refs.at(2);
+        result[2] = refs.at(1);
+        return result;
+    }
+
+  }
+ 
+
+/*******************************************
+             OBCisTransStereo
+********************************************/
+
+  OBCisTransStereo::OBCisTransStereo(OBMol *mol) : OBTetraPlanarStereo(mol), 
+      m_begin(OBStereo::NoId), m_end(OBStereo::NoId)
+  {
+  }
+
+  OBCisTransStereo::~OBCisTransStereo()
+  {
+  
+  }
+
+  bool OBCisTransStereo::IsValid() const
+  {
+    if ((m_begin == OBStereo::NoId) || (m_end == OBStereo::NoId))
+      return false;
+    if (m_refs.size() != 4)
+      return false;
+    return true;
+  }
+
+  void OBCisTransStereo::SetCenters(unsigned long begin, unsigned long end)
+  {
+    m_begin = begin;
+    m_end = end;
+  }
+    
+  unsigned long OBCisTransStereo::GetBegin() const
+  {
+    return m_begin;
+  }
+ 
+  void OBCisTransStereo::SetBegin(unsigned long id)
+  {
+    m_begin = id;
+  }
+  
+  unsigned long OBCisTransStereo::GetEnd() const
+  {
+    return m_end;
+  }
+
+  void OBCisTransStereo::SetEnd(unsigned long id)
+  {
+    m_end = id;
+  }
+ 
+  void OBCisTransStereo::SetRefs(const std::vector<unsigned long> &refs, 
+      OBStereo::Shape shape)
+  {
+    //assert( refs.size() == 4 );
+    m_refs = OBTetraPlanarStereo::ToInternal(refs, shape);
+  }
+  
+  std::vector<unsigned long> OBCisTransStereo::GetRefs(OBStereo::Shape shape) const
+  {
+    if (m_refs.empty())
+      return m_refs;
+    return OBTetraPlanarStereo::ToShape(m_refs, shape);
+  }
+  
+  bool OBCisTransStereo::IsTrans(unsigned long id1, unsigned long id2) const
+  {
+    return (GetTransRef(id1) == id2);
+  }
+  
+  bool OBCisTransStereo::IsCis(unsigned long id1, unsigned long id2) const
+  {
+    return (GetCisRef(id1) == id2);
+  }
+ 
+  bool OBCisTransStereo::Compare(const std::vector<unsigned long> &refs, OBStereo::Shape shape) const
+  {
+    if (!IsValid() || (refs.size() != 4))
+      return false;
+
+    std::vector<unsigned long> u = OBTetraPlanarStereo::ToInternal(refs, shape);
+    unsigned long a1 = u.at(0);
+    unsigned long b1 = u.at(2);
+
+    if ((a1 == OBStereo::ImplicitId) && (b1 == OBStereo::ImplicitId)) {
+      a1 = u.at(1);
+      b1 = u.at(3);
+    }
+
+    if (b1 != OBStereo::ImplicitId)
+      if (a1 == GetTransRef(b1))
+        return true;
+    if (a1 != OBStereo::ImplicitId)
+      if (b1 == GetTransRef(a1))
+        return true;
+
+    return false;
+  }
+
+  unsigned long OBCisTransStereo::GetTransRef(unsigned long id) const
+  {
+    if (!IsValid())
+      return OBStereo::NoId;
+
+    if (id == OBStereo::ImplicitId)
+      return OBStereo::NoId;
+
+    // find id1
+    for (int i = 0; i < 4; ++i) {
+      if (m_refs.at(i) == id) {
+        // use it's index to compare id2 with the opposite reference id
+        int j = (i > 1) ? i - 2 : i + 2;
+        // make sure they are not bonded to the same atom
+        unsigned long transId = m_refs.at(j);
+        if (transId == OBStereo::ImplicitId)
+          return OBStereo::ImplicitId;
+        if (IsOnSameAtom(id, transId)) {
+          obErrorLog.ThrowError(__FUNCTION__, 
+              "OBCisTransStereo::GetTransRef : References don't match bond orientation", obError);
+          return OBStereo::NoId;
+        }
+        return transId;
+      }
+    }
+
+    // id not found
+    return OBStereo::NoId;
+  }
+
+  unsigned long OBCisTransStereo::GetCisRef(unsigned long id) const
+  {
+    if (!IsValid())
+      return OBStereo::NoId;
+
+    if (id == OBStereo::ImplicitId)
+      return OBStereo::NoId;
+
+    // find id
+    for (int i = 0; i < 4; ++i) {
+      if (m_refs.at(i) == id) {
+        // use it's index to get the left/right reference ids
+        int j = (i > 0) ? i - 1 : 3;
+        int k = (i < 3) ? i + 1 : 0;
+        // make sure they are not bonded to the same atom
+        if (m_refs.at(j) != OBStereo::ImplicitId)
+          if (!IsOnSameAtom(id, m_refs.at(j)))
+            return m_refs.at(j);
+        if (m_refs.at(k) != OBStereo::ImplicitId)
+          if (!IsOnSameAtom(id, m_refs.at(k)))
+            return m_refs.at(k);
+
+        if ((m_refs.at(j) == OBStereo::ImplicitId) && (m_refs.at(k) == OBStereo::ImplicitId)) {
+          return OBStereo::ImplicitId;       
+        }
+
+        obErrorLog.ThrowError(__FUNCTION__, 
+            "OBCisTransStereo::GetTransRef : References don't match bond orientation", obError);
+        return OBStereo::NoId;
+      }
+    }
+
+    // id not found
+    return OBStereo::NoId;
+  }
+    
+  bool OBCisTransStereo::IsOnSameAtom(unsigned long id1, unsigned long id2) const
+  {
+    const OBMol *mol = GetMolecule();
+    if (!mol) {
+      obErrorLog.ThrowError(__FUNCTION__, "OBCisTransStereo::IsOnSameAtom : No valid molecule set", obError);
+      return false;
+    }
+
+    OBAtom *begin = mol->GetAtom(m_begin);
+    if (!begin) {
+      obErrorLog.ThrowError(__FUNCTION__, "OBCisTransStereo::IsOnSameAtom : Begin reference id is not valid.", obError);
+      return false;
+    }
+    OBAtom *end = mol->GetAtom(m_end);
+    if (!end) {
+      obErrorLog.ThrowError(__FUNCTION__, "OBCisTransStereo::IsOnSameAtom : End reference id is not valid.", obError);
+      return false;
+    }
+
+    OBAtom *a = mol->GetAtom(id1);
+    OBAtom *b = mol->GetAtom(id2);
+    
+    if (a && b) {
+      // both on begin atom?
+      if (a->IsConnected(begin) && b->IsConnected(begin))
+          return true;
+      // both on end atom?
+      if (a->IsConnected(end) && b->IsConnected(end))
+          return true;
+      return false;
+    } else {
+      if (a) {
+        // b atom not found, could be a deleted hydrogen...
+        if (a->IsConnected(begin)) {
+          // a is connected to begin. if this is the atom missing a hydrogen, return false
+          if (begin->GetValence() == 2)
+            return true;
+          // check if the end atom really is missing an atom
+          if (end->GetValence() != 2) {
+            obErrorLog.ThrowError(__FUNCTION__, 
+                "OBCisTransStereo::IsOnSameAtom : id2 is not valid and is not a missing hydrogen.", obError);
+            return false;
+          }
+          // inform user we are treating id2 as deleted hydrogen 
+          obErrorLog.ThrowError(__FUNCTION__, 
+              "OBCisTransStereo::IsOnSameAtom : Atom with id2 doesn't exist anymore, must be a (deleted) hydrogen.", obInfo);
+        } else if (a->IsConnected(end)) {
+          // a is connected to end. again, if this is the atom missing a hydrogen, return false
+          if (end->GetValence() == 2)
+            return true;
+          // check if the begin atom really is missing an atom
+          if (begin->GetValence() != 2) {
+            obErrorLog.ThrowError(__FUNCTION__, 
+                "OBCisTransStereo::IsOnSameAtom : id2 is not valid and is not a missing hydrogen.", obError);
+            return true;
+          }
+          // inform user we are treating id2 as deleted hydrogen 
+          obErrorLog.ThrowError(__FUNCTION__, 
+              "OBCisTransStereo::IsOnSameAtom : Atom with id2 doesn't exist, must be a (deleted) hydrogen.", obInfo);
+ 
+        } else {
+          obErrorLog.ThrowError(__FUNCTION__, 
+              "OBCisTransStereo::IsOnSameAtom : Atom with id1 isn't connected to the begin or end atom.", obError);
+          return true;      
+        }
+      } else if (b) {
+        // a atom not found, could be a deleted hydrogen...
+        if (b->IsConnected(begin)) {
+          // b is connected to begin. if this is the atom missing a hydrogen, return false
+          if (begin->GetValence() == 2)
+            return true;
+          // check if the end atom really is missing an atom
+          if (end->GetValence() != 2) {
+            obErrorLog.ThrowError(__FUNCTION__, 
+                "OBCisTransStereo::IsOnSameAtom : id1 is not valid and is not a missing hydrogen.", obError);
+            return true;
+          }
+          // inform user we are treating id1 as deleted hydrogen 
+          obErrorLog.ThrowError(__FUNCTION__, 
+              "OBCisTransStereo::IsOnSameAtom : Atom with id1 doesn't exist, must be a (deleted) hydrogen.", obInfo);
+        } else if (b->IsConnected(end)) {
+          // a is connected to end. again, if this is the atom missing a hydrogen, return false
+          if (end->GetValence() == 2)
+            return true;
+          // check if the begin atom really is missing an atom
+          if (begin->GetValence() != 2) {
+            obErrorLog.ThrowError(__FUNCTION__, 
+                "OBCisTransStereo::IsOnSameAtom : id1 is not valid and is not a missing hydrogen.", obError);
+            return true;
+          }
+          // inform user we are treating id2 as deleted hydrogen 
+          obErrorLog.ThrowError(__FUNCTION__, 
+              "OBCisTransStereo::IsOnSameAtom : Atom with id1 doesn't exist, must be a (deleted) hydrogen.", obInfo);
+        } else {
+          obErrorLog.ThrowError(__FUNCTION__, 
+              "OBCisTransStereo::IsOnSameAtom : Atom with id1 isn't connected to the begin or end atom.", obError);
+          return true;      
+        }
+      } else {
+        OBAtom *c = 0, *d = 0;
+        // no a & b, check the remaining ids which will reveal same info
+        for (int i = 0; i < 4; ++i) {
+          if ((m_refs.at(i) == id1) || (m_refs.at(i) == id2))
+            continue;
+          if (!c) {
+            c = mol->GetAtom(m_refs.at(i));
+          } else {
+            d = mol->GetAtom(m_refs.at(i));
+          }
+        }
+        if (!c || !d) {
+          obErrorLog.ThrowError(__FUNCTION__, "OBCisTransStereo::IsOnSameAtom : invalid stereochemistry!", obError);
+          return true;
+        }
+        if ((begin->GetValence() != 2) || (end->GetValence() != 2)) {
+          obErrorLog.ThrowError(__FUNCTION__, "OBCisTransStereo::IsOnSameAtom : invalid stereochemistry!", obError);
+          return true;
+        }
+        obErrorLog.ThrowError(__FUNCTION__, 
+            "OBCisTransStereo::IsOnSameAtom : Atoms with id1 & id2 don't exist, must be a (deleted) hydrogens.", obInfo);
+        return IsOnSameAtom(c->GetIdx(), d->GetIdx());
+      }
+    }
+
+    return false;  
+  }
 
   /**
    * Temp storage for stereochemistry
@@ -497,11 +1127,11 @@ namespace OpenBabel {
           // For the moment, ignore existing IsUp() or IsDown() values
           std::vector<OBBond *> refbonds(4, NULL);
           refbonds[0] = mol.GetBond(refs[0], ChiralSearch->GetBegin());
-          if (refs[1]!=OBStereo::HydrogenId) // Could be a hydrogen
+          if (refs[1]!=OBStereo::ImplicitId) // Could be a hydrogen
             refbonds[1] = mol.GetBond(refs[1], ChiralSearch->GetBegin());
-          if (refs[2]!=OBStereo::HydrogenId) // Could be a hydrogen
+          if (refs[2]!=OBStereo::ImplicitId) // Could be a hydrogen
             refbonds[2] = mol.GetBond(refs[2], ChiralSearch->GetEnd());
-          if (refs[3]!=OBStereo::HydrogenId) // Could be a hydrogen
+          if (refs[3]!=OBStereo::ImplicitId) // Could be a hydrogen
             refbonds[3] = mol.GetBond(refs[3], ChiralSearch->GetEnd());
 
           // Have we already set the stereo of any of the bonds in this
@@ -618,8 +1248,8 @@ namespace OpenBabel {
       if (a1_b1 == NULL || a2_b1 == NULL) continue; // No cis/trans
       
       // a1_b2 and/or a2_b2 will be NULL if there are bonds to implicit hydrogens
-      unsigned int second = (a1_b2 == NULL) ? OBStereo::HydrogenId : a1_b2->GetNbrAtomIdx(a1);
-      unsigned int fourth = (a2_b2 == NULL) ? OBStereo::HydrogenId : a2_b2->GetNbrAtomIdx(a2);
+      unsigned int second = (a1_b2 == NULL) ? OBStereo::ImplicitId : a1_b2->GetNbrAtomIdx(a1);
+      unsigned int fourth = (a2_b2 == NULL) ? OBStereo::ImplicitId : a2_b2->GetNbrAtomIdx(a2);
 
       // If a1_stereo==a2_stereo, this means cis for a1_b1 and a2_b1.
       OBCisTransStereo ct = OBCisTransStereo(&mol);
@@ -2463,8 +3093,8 @@ namespace OpenBabel {
       if (a1_b1 == NULL || a2_b1 == NULL) continue; // No cis/trans
       
       // a1_b2 and/or a2_b2 will be NULL if there are bonds to implicit hydrogens
-      unsigned int second = (a1_b2 == NULL) ? OBStereo::HydrogenId : a1_b2->GetNbrAtomIdx(a1);
-      unsigned int fourth = (a2_b2 == NULL) ? OBStereo::HydrogenId : a2_b2->GetNbrAtomIdx(a2);
+      unsigned int second = (a1_b2 == NULL) ? OBStereo::ImplicitId : a1_b2->GetNbrAtomIdx(a1);
+      unsigned int fourth = (a2_b2 == NULL) ? OBStereo::ImplicitId : a2_b2->GetNbrAtomIdx(a2);
 
       // If a1_b1 and a2_b1 are both either Up or Down, this means cis for a1_b1 and a2_b1.
       OBCisTransStereo ct = OBCisTransStereo(&mol);
@@ -2579,11 +3209,11 @@ namespace OpenBabel {
           
           std::vector<OBBond *> refbonds(4, NULL);
           refbonds[0] = mol->GetBond(refs[0], ChiralSearch->GetBegin());
-          if (refs[1]!=OBStereo::HydrogenId) // Could be a hydrogen
+          if (refs[1]!=OBStereo::ImplicitId) // Could be a hydrogen
             refbonds[1] = mol->GetBond(refs[1], ChiralSearch->GetBegin());
-          if (refs[2]!=OBStereo::HydrogenId) // Could be a hydrogen
+          if (refs[2]!=OBStereo::ImplicitId) // Could be a hydrogen
             refbonds[2] = mol->GetBond(refs[2], ChiralSearch->GetEnd());
-          if (refs[3]!=OBStereo::HydrogenId) // Could be a hydrogen
+          if (refs[3]!=OBStereo::ImplicitId) // Could be a hydrogen
             refbonds[3] = mol->GetBond(refs[3], ChiralSearch->GetEnd());
 
           // What symbol would the four refs use if before the dbl bond?
